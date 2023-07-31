@@ -1,0 +1,305 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.108.0">
+    <title>KRCT</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/checkout/">
+
+    
+
+    
+
+<link href="{% static 'assets/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .b-example-divider {
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+  .modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  overflow-x: hidden;
+}
+.toggle-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 10px;
+  padding: 8px 16px;
+  background-color: darkblue;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+
+  transition: background-color 0.3s;
+}
+
+    </style>
+
+    
+    <!-- Custom styles for this template -->
+    <link href="{% static 'assets/dist/css/checkout.css' %}" rel="stylesheet">
+  </head>
+  <body>
+    
+<div class="container">
+  <nav class="container-fluid d-flex">
+    <button id="toggleBtn" class="toggle-button justify-content-end mx-5 text-end"></button>
+  </nav>
+  <main>
+    <div class="py-5 text-center">
+      <img class="d-block mx-auto mb-4 rounded-5 shadow" src="{% static 'assets/images/kr1.jpg' %}" alt="" width="100" height="90">
+      <h2>Fest Registration</h2>
+      
+    </div>
+
+
+
+      <div class="justify-content-center">
+        
+        <form action="{% url 'reg' post.id %}" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+        {% csrf_token %}
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <label for="title">Your Name</label>
+              <input type="text" class="form-control" id="" name="name" placeholde="Full Name" required>
+              <div class="invalid-feedback">
+                Your Name is required
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <label for="email">Email</label>
+              <input type="email" name="email" id="email" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Email address" required>
+              <div class="invalid-feedback">
+                Email is required.
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <label for="cllgname">Your Institute Name</label>
+              <input type="text" id="cllgname" class="form-control" placeholder="" aria-label="" name="cllgname" required>
+              <div class="invalid-feedback">
+                Your Institute name is required.
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <label for="sors" class="form-label">Student Or Faculty</label>
+              <select class="form-select" id="sors" name="sors">
+                <option value="student">Student</option>
+                <option value="staff">Faculty</option>
+
+              </select>
+
+              
+            </div>
+            <div class="col-sm-6">
+              <label for="dept" class="form-label">Fest Name</label>
+              {% if post.title %}
+              <select class="form-select" id="" name="eve" required>
+                <option value="{{post.title}}">{{post.title}}</option>
+              </select>
+              {% else %}
+              <input type="text" class="form-control" id="" name="eve" placeholde="Fest Name" required>
+              <div class="invalid-feedback">
+                Fest Name is required
+              </div>
+              {% endif %}
+              
+            </div>
+
+            <div class="col-sm-6">
+              <label for="ecllg">Fest College</label>
+              <select class="form-select" id="ecllg" name="ecllg" required>
+                    {% if post.cllg %}
+                    <option value="{{post.cllg}}">{{post.cllg}}</option>
+                    {% else %}
+                    <option value="krct">KRCT</option>
+                    <option value="krce">KRCE</option>
+                    <option value="mkce">MKCE</option>
+                    {% endif %}
+                    
+                  </select>
+              <div class="invalid-feedback">
+                College Name Required
+              </div>
+            </div>
+            <div class="col-md-12">
+              <label for="uimg">Proof(Id proof)</label>
+      <input type="file" class="form-control" placeholder="" aria-label="" name="uimg" id="uimg" accept="image/x-png,image/jpeg" required>
+              <div class="invalid-feedback">
+                Id proof Required
+              </div>
+            </div>
+
+            
+          
+          <hr class="my-4">
+
+          <button class="w-100 btn btn-primary btn-lg" type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer class="my-5 pt-5  text-center text-small">
+    <span>&copy; {% now "Y" %} KRGI</span>
+    
+  </footer>
+</div>
+<script>
+    const toggleBtn = document.getElementById('toggleBtn');
+
+let currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+function applyTheme(theme) {
+  const isDarkMode = theme === 'dark';
+  document.documentElement.style.setProperty('--bg-color', isDarkMode ? '#333' : '#fff');
+  document.documentElement.style.setProperty('--text-color', isDarkMode ? '#fff' : '#333');
+  
+  toggleBtn.textContent = isDarkMode ? 'Light Mode' : 'Dark Mode';
+  
+  localStorage.setItem('theme', theme);
+
+}
+
+toggleBtn.addEventListener('click', () => {
+  currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  applyTheme(currentTheme);
+  toggleBtn.textContent = currentTheme === 'dark' ? 'Light Mode' : 'Dark Mode';
+});
+
+applyTheme(currentTheme);
+
+
+  </script>
+
+    <script src="{% static 'assets/dist/js/bootstrap.bundle.min.js' %}"></script>
+
+      <script src="{% static 'assets/dist/js/checkout.js' %}"></script>
+  <script>
+  var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (Competition.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+function myFunction() {
+  var element = document.body;
+  element.classList.toggle("dark-mode");
+}
+
+
+  </script>
+  </body>
+</html>
+

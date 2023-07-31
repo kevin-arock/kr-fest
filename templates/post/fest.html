@@ -1,0 +1,516 @@
+{% load static%}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>KRGI</title>
+
+    <!-- CSS FILES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    
+
+    <link rel="stylesheet" href="{% static 'assets/dist/css/bootstrap.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/dist/css/bootstrap-icons.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/dist/css/owl.carousel.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/dist/css/owl.theme.default.min.css' %}">
+
+    
+    <style>
+      body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  overflow-x: hidden;
+}
+.darker{
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .b-example-divider {
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+
+#pic{
+    background-image: url("{% static 'assets/images/bb.jpg' %}");
+
+  /* Full height */
+  height: 100%;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-backdrop-filter: blur(50px);
+  backdrop-filter: blur(10px);
+}
+
+#h{
+    background-image: url("neb.jpg");
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-backdrop-filter: blur(50px);
+  backdrop-filter: blur(50px);
+}
+
+
+.bg-purple {
+  background-color: #021b9c;
+}
+.p{
+  color:#001369;
+}
+ .owl-carousel .owl-item.active.center {
+      
+      filter: none;
+      z-index: 2;
+      border-radius: 100%;
+    }
+
+    .owl-carousel .owl-item:not(.active) {
+      filter: blur(2px);
+      transform: scale(0.8);
+      z-index: 1;
+    }
+
+    .owl-carousel .owl-item {
+      transition: all 0.4s ease-in-out;
+    }
+        .owl-carousel .owl-dot span {
+      width: 12px;
+      height: 12px;
+      margin: 0 5px;
+      border-radius: 50%;
+      background: #555;
+      display: flex;
+      transition: all 0.3s ease;
+      justify-content: center;
+      align-items: center;
+      align-self: center;
+      position: relative;
+    }
+
+    .owl-carousel .owl-dot.active span {
+      background: #ddd;
+    }
+
+    .is-hidden{
+      display: none;
+    }
+      .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+    
+
+.toggle-button {
+  padding: 8px 16px;
+  background-color: darkblue;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+
+  transition: background-color 0.3s;
+}
+
+
+
+
+.card-body.darker {
+  background-color: #333;
+  color: #fff;
+}
+
+    </style>
+
+    
+
+
+</head>
+
+<body>
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-purple fixed-top" aria-label="Offcanvas navbar large">
+    <div class="container-fluid">
+        <a class="navbar-brand me-lg-5 me-0" href="{% url 'home' %}">
+        <img src="{% static 'assets/images/kr1.jpg' %}" class="logo-image img-fluid shadow" alt="" style="height: 30px;width: 30px; border-radius: 50%;">
+        </a>
+      <a class="navbar-brand fw-bold" href="#">KR FEST</a>
+      <button id="toggleBtn" class="toggle-button justify-content-center mx-5"></button>
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasNavbar2Label">KR FEST</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <li class="nav-item">
+              <a class="nav-link " aria-current="page" href="{% url 'home' %}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Fests</a>
+            </li>
+            
+          </ul>
+          
+        </div>
+      </div>
+    </div>
+  </nav>
+
+</header>
+    <main>
+
+        <div class="container-fluid  py-3" id="pic">
+    
+      
+      <div class="justify-content-center d-flex container py-5 mt-5">
+        <h1 class="display-5 fw-bold lh-1 mb-3 purple">KR FESTS</h1>
+        
+      </div>
+    
+  </div><br><br><br>
+
+      
+ 
+<div class="sticky-container">
+  <div class="container justify-content-between d-flex"> 
+    <input type="text" id="searchInput" placeholder="Search Fest" style="border-radius: 10px;">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Filter</button>
+  </div>
+</div>
+
+<div class="modal  fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 text-dark" id="exampleModalLabel">Filter Fests</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col list-group list-group-flush">
+            <h6>Department:</h6>
+            <label class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="all">ALL</label>
+            <label class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="cse">CSE</label>
+            <label class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="aids">AIDS</label>
+            <label class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="aiml">AIML</label>
+            <label class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="mech">MECH</label>
+            <label class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="civil">CIVIL</label>
+            <label class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="ece">ECE</label>
+            <label class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="eee">EEE</label>
+          </div>
+          <div class="col list-group list-group-flush">
+            <h6>College:</h6>
+      <label class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="krct">KRCT</label>
+            <label class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="krce">KRCE</label>
+            <label class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="mkce">MKCE</label>
+            
+          </div>
+          <div class="col list-group list-group-flush">
+            <h6>Events:</h6>
+            <label class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="symposium">Symposium</label>
+            <label class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="workshop">Workshop</label>
+            <label class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="fdp">FDP</label>
+            <label class="list-group-item"><input class="form-check-input me-1" type="checkbox" value="webinar">Webinar</label>
+            
+          </div>
+  
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+                <div class="album py-5">
+    <div class="container-fluid">
+
+      <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 g-3 row-gap-3">
+        {% if posts == True %}
+        <div class="justify-content-center text-center py-5 container-fluid">
+          <h3>There are no fests available right now</h3>
+        </div>
+        {% else %}
+          {% for i in posts %}
+          <div class="col cards " data-category="{{i.etype}} {{i.cllg}} {{i.dept}}">
+          <div class="card box shadow-sm  rounded-4" >
+            {% if i.img %}
+            <img src="{{i.img.url|default_if_none:'#'}} " alt="No image" height="250px" class="rounded-4">
+            {% else %}
+            <img src="" alt="No image">
+            {% endif %}
+            <div class="card-body">
+              <h6 class="card-title">{{i.title}}</h6>
+                        <hr>
+                        <h6 class="card-title">{{i.etype}}<span style="opacity: 0">{{i.cllg}}</span></h6>
+                        <hr>
+                        {% if i.cllg == 'krct'%}
+                        <h6>KRCT</h6>
+                        {% else %}
+                            {% if i.cllg == 'krce'%}
+                            <h6>KRCE</h6>
+                            {% else %}
+                            <h6>MKCE</h6>
+                            {% endif %}
+                        {% endif %}
+                        <hr>
+                        <a href="{% url 'detail' i.id %}" class="btn btn-outline-primary btn-sm shadow rounded-3">View Details</a>
+                      {% if i.pay == 0 %}
+                      <span class="text-end"><h6 class="text-end">Free</h6></span>
+                      {% else %}
+                      <span class="text-end"><h6 class="text-end">Rs.{{i.pay}}</h6></span>
+                      {% endif %}
+            </div>
+          </div>
+        </div>
+          {% endfor %}
+        {% endif %}
+        
+      </div>
+    </div>
+  </div>
+        </div>
+        <div id="ss">
+
+        </div>
+        </section>
+        <!--
+        <div id="pagination-container">
+           
+            {% if post.has_other_pages %}
+                <ul class="pagination">
+                    {% if post.has_previous %}
+                        <li class="page-item"><a class="page-link" href="?page=1">First</a></li>
+                        <li class="page-item"><a class="page-link" href="?page={{ cards.previous_page_number }}">Previous</a></li>
+                    {% endif %}
+                    {% for num in post.paginator.page_range %}
+                        {% if num == post.number %}
+                            <li class="page-item active"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                        {% elif num > post.number|add:'-10' and num < post.number|add:'10' %}
+                            <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if post.has_next %}
+                        <li class="page-item"><a class="page-link" href="?page={{ post.next_page_number }}">Next</a></li>
+                        <li class="page-item"><a class="page-link" href="?page={{ post.paginator.num_pages }}">Last</a></li>
+                    {% endif %}
+                </ul>
+            {% endif %}
+        </div>
+      -->
+    </main>
+    
+
+    <br><br><br><br><br><br><br>
+
+
+    <div class="container-fluid">
+  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <p class="col-md-4 mb-0 ">&copy; {% now "Y" %} KRGI</p>
+
+    <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+      <img src="{% static 'assets/images/kr.png' %}" class="logo-image img-fluid " alt="templatemo pod talk" style="height: 40px;width: 40px;">
+    </a>
+
+    <ul class="nav col-md-4 justify-content-end">
+      <li class="nav-item"><a href="{% url 'home' %}" class="nav-link px-2 ">Home</a></li>
+      
+      
+    </ul>
+  </footer>
+</div>
+
+
+    <!-- JAVASCRIPT FILES -->
+    
+    <script type="text/javascript">
+      (() => {
+  'use strict'
+
+  document.querySelector('#navbarSideCollapse').addEventListener('click', () => {
+    document.querySelector('.offcanvas-collapse').classList.toggle('open')
+  })
+})()
+
+
+
+    </script>
+    <script>
+  // JavaScript code for dark/light mode and card filtering
+  const toggleBtn = document.getElementById('toggleBtn');
+  const image = document.getElementById('pic');
+  const cards = document.querySelectorAll('.cards');
+  const carde = document.querySelectorAll('.card-body');
+  const filterCheckboxes = document.querySelectorAll('#exampleModal input[type="checkbox"]');
+  const searchInput = document.getElementById('searchInput');
+
+  let currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+  function applyTheme(theme) {
+    const isDarkMode = theme === 'dark';
+    document.documentElement.style.setProperty('--bg-color', isDarkMode ? '#333' : '#fff');
+    document.documentElement.style.setProperty('--text-color', isDarkMode ? '#fff' : '#333');
+    image.style.backgroundImage = isDarkMode ? "url('{% static 'assets/images/dark.jpg' %}')" : "url('{% static 'assets/images/bb.jpg' %}')";
+
+    for (let i = 0; i < carde.length; i++) {
+      if (isDarkMode) {
+        carde[i].classList.add('bg-dark');
+      } else {
+        carde[i].classList.remove('bg-dark');
+      }
+    }
+
+    toggleBtn.textContent = isDarkMode ? 'Light Mode' : 'Dark Mode';
+    localStorage.setItem('theme', theme);
+  }
+
+  function filterCards() {
+    const selectedFilters = [];
+
+    filterCheckboxes.forEach(function (checkbox) {
+      if (checkbox.checked) {
+        selectedFilters.push(checkbox.value);
+      }
+    });
+
+    cards.forEach(function (card) {
+      card.style.display = 'none';
+      const filterGroup = card.dataset.category;
+      let matched = true;
+
+      selectedFilters.forEach(function (filterValue) {
+        if (!filterGroup.includes(filterValue)) {
+          matched = false;
+          return; // Break the loop if not matched
+        }
+      });
+
+      const searchInputValue = searchInput.value.trim().toLowerCase();
+      if (searchInputValue !== '' && !filterGroup.toLowerCase().includes(searchInputValue)) {
+        matched = false;
+      }
+
+      if (matched) {
+        card.style.display = 'block';
+      }
+    });
+
+    // Save selectedFilters array to local storage
+    localStorage.setItem('selectedFilters', JSON.stringify(selectedFilters));
+  }
+
+  // Event handler for checkbox changes
+  filterCheckboxes.forEach(function (checkbox) {
+    checkbox.addEventListener('change', filterCards);
+  });
+
+  // Event handler for search input keyup
+  searchInput.addEventListener('keyup', filterCards);
+
+  toggleBtn.addEventListener('click', () => {
+    currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    applyTheme(currentTheme);
+    toggleBtn.textContent = currentTheme === 'dark' ? 'Light Mode' : 'Dark Mode';
+  });
+
+  // Apply initial theme and filters
+  applyTheme(currentTheme);
+
+  const savedFilters = localStorage.getItem('selectedFilters');
+  if (savedFilters) {
+    const selectedFilters = JSON.parse(savedFilters);
+    filterCheckboxes.forEach(function (checkbox) {
+      if (selectedFilters.includes(checkbox.value)) {
+        checkbox.checked = true;
+      }
+    });
+
+    filterCards(); // Trigger the filter function to apply saved filters
+  }
+    </script>
+    
+    
+   
+  
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+  <script src="{% static 'assets/dist/js/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/dist/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/dist/js/owl.carousel.min.js' %}"></script>
+</body>
+
+</html>

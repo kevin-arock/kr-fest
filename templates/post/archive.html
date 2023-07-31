@@ -1,0 +1,246 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    
+    <meta name="generator" content="Hugo 0.108.0">
+    <title>iqac</title>
+
+    
+
+    
+
+    
+
+<link href="{% static 'assets/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .b-example-divider {
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+      th {
+  position: sticky;
+  top: 0;
+  
+}
+.is-hidden{
+  display: none;
+}
+.bg-purple {
+  background-color:#001369;
+}
+
+    </style>
+
+    
+    <!-- Custom styles for this template -->
+    <link href="{% static 'assets/dist/css/dashboard.css' %}" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+  
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-purple shadow">
+        <div class="container-fluid">
+          <a class="text-light fw-bold text-decoration-none" href="#"><h4>KRGI</h4></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="{% url 'krctiqac' %}">dashboard</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="{% url 'krctiqac_archive' %}">Archives</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+              </li>
+              
+            </ul>
+            <form class="d-flex" action="{% url 'mkceiqac' %}" role="search" method="post">
+              {% csrf_token %}
+              <input class="form-control me-2" type="text" id="searchbox" placeholder="Search Event" aria-label="Search" name="search">
+             
+            </form>
+            
+        </div>
+      </nav>
+    </header>
+    <main class="p-5 mt-5">
+      
+    
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">KRCT Archives</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          
+        </div>
+      </div>
+      <div class="table-responsive rounded-3 shadow">
+      <table class="table">
+        <thead class="bg-purple text-light">
+          <th>Event Name</th>
+          <th>Date</th>
+            <th>View Post</th>
+           <th>View Report</th>
+          <th>Delete</th>
+        </thead>
+        <tbody>
+          <tr>
+         
+          {% for i in post%}
+          <tr class="box">
+          <td>{{i.title}}</td>
+          <td>{{i.date}}</td>
+          <td><a href="{% url 'admindetail' i.id %}" class="btn btn-outline-primary btn-sm">view</a></td>
+          <td><a href="{% url 'viewreport' i.id %}" class="btn btn-outline-primary btn-sm" target="_blank">view</a></td>
+          <td><a href="{% url 'delete' i.id %}" class="btn btn-outline-danger btn-sm">delete</a></td>
+          </tr>
+       
+          {% endfor %}
+        </tbody>
+      </table></div><br><br>
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          
+       
+      
+      {% if post.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page=1">&laquo First</a></li>
+      
+        <li class="page-item"><a class="page-link" href="?page={{ post.previous_page_number }}">Previous</a></li>
+        
+      {% endif %}
+      
+      <!--
+      <li class="page-item disabled"><a href="#" class="page-link">Page {{ venues.number }} of {{ venues.paginator.num_pages }}</a></li>
+      -->
+      
+      {% for i in nums %}
+        <li class="page-item"><a class="page-link" href="?page={{ forloop.counter }}">{{ forloop.counter }}</a></li>
+      
+      {% endfor %}
+      
+      
+      {% if post.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{ post.next_page_number }}">Next</a></li>
+      
+        <li class="page-item"><a class="page-link" href="?page={{ post.paginator.num_pages }}">Last &raquo</a></li>
+      
+      {% endif %}
+      
+       </ul>
+      </nav>
+      
+    </main>
+  </div>
+</div>
+<div class="container-fluid">
+  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <p class="col-md-4 mb-0 text-muted">&copy; {% now "Y" %} KRGI</p>
+
+    <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+      <img src="{% static 'assets/images/kr.png' %}" class="logo-image img-fluid " alt="templatemo pod talk" style="height: 40px;width: 40px;">
+    </a>
+
+    <ul class="nav col-md-4 justify-content-end">
+      <li class="nav-item"><a href="{% url 'home' %}" class="nav-link px-2 text-muted">Home</a></li>
+      <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link px-2 text-muted">Logout</a></li>
+      
+    </ul>
+  </footer>
+</div>
+
+    <script src="{% static 'assets/dist/js/bootstrap.bundle.min.js' %}"></script>
+
+      <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous">
+
+      </script>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
+      <script src="{% static 'assets/dist/js/dashboard.js' %}"></script>
+      <script type="text/javascript">
+        setTimeout(() => {
+        let get = document.getElementById('element');
+        get.remove();
+        }, 2000);
+        </script>
+        <script type="text/javascript">
+         let cards = document.querySelectorAll('.box')
+    
+function liveSearch() {
+    let search_query = document.getElementById("searchbox").value;
+    
+    //Use innerText if all contents are visible
+    //Use textContent for including hidden elements
+    for (var i = 0; i < cards.length; i++) {
+        if(cards[i].textContent.toLowerCase()
+                .includes(search_query.toLowerCase())) {
+            cards[i].classList.remove("is-hidden");
+        } else {
+            cards[i].classList.add("is-hidden");
+        }
+    }
+}
+
+//A little delay
+let typingTimer;               
+let typeInterval = 500;  
+let searchInput = document.getElementById('searchbox');
+
+searchInput.addEventListener('keyup', () => {
+    clearTimeout(typingTimer);
+    typingTimer = setTimeout(liveSearch, typeInterval);
+});
+    </script>
+  </body>
+</html>

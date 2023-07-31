@@ -1,0 +1,217 @@
+
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    
+    <meta name="generator" content="Hugo 0.108.0">
+    <title>krctpost</title>
+
+    
+
+    
+
+    
+
+<link href="{% static 'assets/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <style>
+    
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .b-example-divider {
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+     
+    </style>
+
+    
+    <!-- Custom styles for this template -->
+    <link href="{% static 'assets/dist/css/dashboard.css' %}" rel="stylesheet">
+  </head>
+  <body data-bs-theme="light">
+    <header>
+  
+      <nav class="navbar navbar-expand-md navbar-light fixed-top  shadow">
+        <div class="container-fluid">
+          <a class=" text-primary" href="#" style="text-decoration: none;"><h1>KRGI</h1></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'krct@post' %}">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout'%}">Logout</a>
+              </li>
+              
+            </ul>
+            
+            
+        </div>
+      </nav>
+    </header><br><br><br><br><br><br>
+    
+    
+    <main class="">
+    <div class="">
+      <h1 class="text-center">Add Report</h1>
+    </div>
+      <div class="container shadow-sm bg-white p-3 mt-5 px-3 py-2">
+<form action="{% url 'addreport' post.id %}" method="post" enctype="multipart/form-data">
+{% csrf_token %}
+<div class="row g-3">
+  <div class="col">
+    {% if post.title %}
+    <label for="">Event Name</label>
+    <select class="form-select form-control" id="" name="eventname">
+    <option value="{{post.title}}">{{post.title}}</option>
+  </select>
+    {% else %}
+    <label for="">Event Name</label>
+    <input type="text" class="form-control" placeholder="" aria-label="" name="eventname" required>
+    {% endif %}
+  </div>
+  
+  <div class="col">
+    <label for="">date</label>
+    {% if post.date %}
+    <input type="date" class="form-control" placeholder="" aria-label="" name="date" value="{{post.date}}">
+    {% else %}
+    <input type="date" class="form-control" placeholder="" aria-label="" name="date" required>
+    {% endif %}
+  </div>
+  <div class="col">
+    <label for="">Time</label>
+    {% if post.time %}
+    <input type="time" class="form-control" placeholder="" aria-label="" name="time" value="{{post.time}}">
+    {% else %}
+    <input type="time" class="form-control" placeholder="" aria-label="" name="time" required>
+    {% endif %}
+  </div>
+  </div><br>
+  <div class="row g-3">
+  <div class="col">
+    <label for="exampleSelect" class="form-label">College</label>
+        <select class="form-select" id="" name="cllg">
+          {% if user == 'krct@post'%}
+          <option value="krct">KRCT</option>
+          {% else %}
+            {% if user == 'krce@post'%}
+            <option value="krct">KRCE</option>
+            {% else %}
+            <option value="krct">MKCE</option>
+            {% endif %}
+          {% endif %}
+        </select>
+  </div>
+  <div class="col">
+    <label for="exampleSelect" class="form-label">Select Department</label>
+        <select class="form-select" id="" name="dept" required>
+          {% if post.dept %}
+          <option value="{{post.dept}}">{{post.dept}}</option>
+          {% else %}
+          <option value="cse">CSE</option>
+          <option value="mech">MECH</option>
+          <option value="civil">CIVIL</option>
+          <option value="ece">ECE</option>
+          <option value="eee">EEE</option>
+          <option value="aids">AI-DS</option>
+          <option value="aiml">AI-ML</option>
+          {% endif %}
+        </select>
+  </div>
+  <div class="col">
+    <label for="" class="form-label">Type of Event</label>
+    {% if post.venue %}
+    <select class="form-select" id="" name="venue">
+          <option value="symposium">Symposium</option>
+    </select>
+    {% else%}
+    <label for="">Event Name</label>
+    <input type="text" class="form-control" placeholder="" aria-label="" name="venue" required>
+    {% endif %}
+          
+  </div>
+  </div><br>
+  <div class="row g-3">
+    <div class="col">
+      <label for="">Payment (Enter 0 for free)</label>
+      <input type="number" class="form-control" placeholder="" aria-label="" min="0" name="pay" required>
+    </div>
+    <div class="col">
+      <label for="">coorfinator</label>
+      <input type="text" class="form-control" placeholder="" aria-label="" name="coor" required>
+    </div>
+    
+    
+  </div><br>
+  <div class="row g-3 justify-content-center">
+      <input type="submit" value="Add" class="btn btn-primary w-25 text-center">
+    </div>
+</form>
+</div>
+    </main>
+    
+
+
+    <script src="{% static 'assets/dist/js/bootstrap.bundle.min.js' %}"></script>
+
+      <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous">
+
+      </script>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
+      <script src="{% static 'assets/dist/js/dashboard.js' %}"></script>
+      
+  </body>
+</html>

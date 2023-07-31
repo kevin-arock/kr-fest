@@ -1,0 +1,315 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.108.0">
+    <title>KRCT</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/checkout/">
+
+    
+
+    
+
+<link href="{% static 'assets/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .b-example-divider {
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+  .modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+.dark-mode {
+  background-color: black;
+  color: white;
+}
+
+    </style>
+
+    
+    <!-- Custom styles for this template -->
+    <link href="{% static 'assets/dist/css/checkout.css' %}" rel="stylesheet">
+  </head>
+  <body class="bg-light">
+    
+<div class="container">
+  <main>
+    <div class="py-5 text-center">
+      <img class="d-block mx-auto mb-4 rounded-5 shadow" src="{% static 'assets/images/kr1.jpg' %}" alt="" width="100" height="90">
+      <h2>Add Fest</h2>
+      
+    </div>
+
+
+
+      <div class="justify-content-center">
+        
+        <form action="{% url 'create' %}" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+        {% csrf_token %}
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <label for="title">Title</label>
+              <input type="text" class="form-control" id="" name="title" required>
+              <div class="invalid-feedback">
+                Title is required
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <label for="date">Date</label>
+              <input type="date" class="form-control" id="" name="date" required>
+              <div class="invalid-feedback">
+                date is required.
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <label for="">Time</label>
+              <input type="time" class="form-control" placeholder="" aria-label="" name="time" required>
+              <div class="invalid-feedback">
+                time is required.
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <label for="cllg" class="form-label">College</label>
+              <select class="form-select" id="cllg" name="cllg">
+                {% if user == 'krct@post'%}
+                <option value="krct">KRCT</option>
+                {% else %}
+                  {% if user == 'krce@post'%}
+                  <option value="krce">KRCE</option>
+                  {% else %}
+                  <option value="mkce">MKCE</option>
+                  {% endif %}
+                {% endif %}
+
+              </select>
+
+              
+            </div>
+            <div class="col-sm-6">
+              <label for="dept" class="form-label">Select Department</label>
+              <select class="form-select" id="" name="dept" multiple required>
+                <option value="all">ALL</option>
+                <option value="cse">CSE</option>
+                <option value="aids">AI-DS</option>
+                <option value="aiml">AI-ML</option>
+                <option value="ece">ECE</option>
+                <option value="eee">EEE</option>
+                <option value="mech">MECH</option>
+                <option value="civil">CIVIL</option>
+              </select>
+              <div class="invalid-feedback">
+                Department Required
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <label for="etype">Type of Event</label>
+              <select class="form-select" id="etype" name="etype" required>
+                    <option value="college-event">College Event</option>
+                    <option value="symposium">Symposium</option>
+                    <option value="workshop">Workshop</option>
+                    <option value="webinar">Webinar</option>
+                    <option value="fd">FD</option>
+                    
+                  </select>
+              <div class="invalid-feedback">
+                Type of Event Required
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+                    <label for="">Payment (Enter 0 for free)</label>
+            <input type="number" class="form-control" placeholder="" aria-label="" min="0" name="pay" required>
+              <div class="invalid-feedback">
+                Fee detail Required
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="">venue</label>
+      <input type="text" class="form-control" placeholder="" aria-label="" name="ven" required>
+              <div class="invalid-feedback">
+                Venue Required
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="">Image</label>
+      <input type="file" class="form-control" placeholder="" aria-label="" name="img" id="imageInput" accept="image/jpeg, image/png, image/jpg" onchange="validateImageSize(this)" required>
+              <div class="invalid-feedback">
+                Event Poster Required
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <label for="">Payment Link (Enter 'nil' for no link)</label>
+      <input type="text" class="form-control" placeholder="" aria-label="" name="reglink" required>
+              <div class="invalid-feedback">
+                Register Link Details required.
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <label for="des" class="form-label">Description</label>
+              <textarea name="description" id="" cols="3" rows="3" class="form-control" required></textarea>
+              <div class="invalid-feedback">
+                Description required
+              </div>
+            </div>
+            
+
+          </div>
+
+          
+          <hr class="my-4">
+
+          <button class="w-100 btn btn-primary btn-lg" type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer class="my-5 pt-5 text-muted text-center text-small">
+    <span>&copy; {% now "Y" %} KRGI</span>
+    
+  </footer>
+</div>
+
+
+    <script src="{% static 'assets/dist/js/bootstrap.bundle.min.js' %}"></script>
+
+      <script src="{% static 'assets/dist/js/checkout.js' %}"></script>
+  <script>
+  var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (Competition.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+function myFunction() {
+  var element = document.body;
+  element.classList.toggle("dark-mode");
+}
+
+
+  </script>
+  <script type="text/javascript">
+    function validateImageSize(fileInput) {
+  const fileSize = fileInput.files[0].size; // Get the size of the selected file
+  const maxSize = 1024 * 1024; // 1MB in bytes
+
+  if (fileSize > maxSize) {
+    // File size is larger than 1MB
+    alert('Please select an image file smaller than 1MB.');
+    fileInput.value = ''; // Clear the file input field
+  }
+}
+
+  </script>
+  </body>
+</html>

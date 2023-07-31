@@ -1,0 +1,653 @@
+{% load static%}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>KRGI</title>
+
+    <!-- CSS FILES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    
+
+    <link rel="stylesheet" href="{% static 'assets/dist/css/bootstrap.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/dist/css/bootstrap-icons.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/dist/css/owl.carousel.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/dist/css/owl.theme.default.min.css' %}">
+
+    
+    <style>
+           body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  overflow-x: hidden;
+}
+.darker{
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .b-example-divider {
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+.description-labels {
+            padding-right: 0;
+        }
+
+        .description-values {
+            padding-left: 0;
+        }
+#pic{
+    background-image: url("{% static 'assets/images/sl.jpg' %}");
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-backdrop-filter: blur(50px);
+  backdrop-filter: blur(50px);
+}
+#h{
+    background-image: url("neb.jpg");
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-backdrop-filter: blur(50px);
+  backdrop-filter: blur(50px);
+}
+
+
+.bg-purple {
+  background-color:#001369;
+}
+.purple {
+  color:#001369;
+}
+.description-cell {
+            word-break: break-word;
+        }
+.google-maps {
+
+        position: relative;
+
+         // This is the aspect ratio
+
+        height: 0px;
+
+        overflow-x: hidden;
+
+    }
+
+.google-maps iframe {
+
+        position: relative;
+
+
+
+        width: 50% !important;
+
+        height: 50% !important;
+
+    }
+
+
+.toggle-button {
+  padding: 8px 16px;
+  background-color: darkblue;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+
+  transition: background-color 0.3s;
+}
+
+    </style>
+    
+
+
+</head>
+
+<body>
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-purple fixed-top" aria-label="Offcanvas navbar large">
+    <div class="container-fluid">
+        <a class="navbar-brand me-lg-5 me-0" href="{% url 'home' %}">
+        <img src="{% static 'assets/images/kr1.jpg' %}" class="logo-image img-fluid shadow" alt="" style="height: 30px;width: 30px; border-radius: 50%;">
+        </a>
+      <a class="navbar-brand fw-bold" href="#">KR FEST</a>
+      <button id="toggleBtn" class="toggle-button justify-content-center mx-5"></button>
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasNavbar2Label">KR FEST</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="{% url 'home' %}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="{% url 'fest' %}">Fests</a>
+            </li>
+            
+          </ul>
+          
+        </div>
+      </div>
+    </div>
+  </nav>
+
+</header>
+    <main>
+
+        <div class="container-fluid bg-primary py-5 text-center" id="pic">
+    
+
+      <div class=" py-5 mt-5">
+        <h1 class="display-5 fw-bold lh-1 mb-3">Fest Details</h1>
+        
+        
+      </div>
+  </div>
+    
+    <section class=" mt-5 container-fluid" id="sec1">
+        <div class="container col-xxl-8 px-4 py-5">
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+      <div class="col-10 col-sm-8 col-lg-6">
+        {% if post.img %}
+        <img src="{{post.img.url}}" class="img-fluid rounded-5 shadow d-block" alt="" style="width: 400px;height: 400px;" loading="lazy">
+        {% else %}
+        <h1>{{post.title}}</h1>
+        {% endif %}
+      </div>
+      <div class="col-lg-6">
+        <h1 class="fw-bold">{{post.title}}</h1>
+                    <h2>{{post.etype}}</h2>
+        <table class="table mt-3 tab" >
+            <tr>
+                <th>Date</th>
+                <td class="fw-bold">{{post.date}}</td>
+            </tr>
+            <tr>
+                <th>Time</th>
+                <td class="fw-bold">{{post.time}}</td>
+            </tr>
+            <tr>
+                <th>College</th>
+                {% if post.cllg == 'krct' %}
+                <td class="fw-bold">K.Ramakrishnan College Of Technology</td>
+                {% else %}
+                    {% if post.cllg == 'krce' %}
+                    <td class="fw-bold">K.Ramakrishnan College Of Engineering</td>
+                    {% else %}
+                    <td class="fw-bold">M.Kumarasamy College Of Engineering</td>
+                    {% endif %}
+                {% endif %}
+            </tr>
+            <tr>
+                <th>Venue</th>
+                <td class="fw-bold">{{post.venue}}</td>
+            </tr>
+            <tr>
+                <th>Payment</th>
+                {% if post.pay == 0 %}
+                <td class="fw-bold">Free</td>
+                {% else %}
+                <td class="fw-bold">Rs.{{post.pay}}</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td class="fw-bold description-cell">{{post.description}}</td>
+            </tr>
+            <tr>
+                <th>Payment link</th>
+                {% if post.pay == 0 %}
+                <td class="fw-bold">None</td>
+                {% else %}
+                  {% if post.reglink %}
+                    <td><a href="{{post.reglink}}">link</a></td>
+                  {% else %}
+                    <td class="fw-bold">None</td>
+                  {% endif %}
+                {% endif %}
+            </tr>
+        </table>
+        {% if post.closed %}
+        {% else %}
+            {% if post.etype == 'college-event' %}
+            {% else %}
+            <a href="{% url 'reg' post.id %}" class="btn btn-success shadow">Register</a>
+            {% endif %}
+        {% endif %}
+        </div>
+      </div>
+    </div>
+  
+        
+    </section>
+        <div
+        class="rounded-5 d-flex flex-wrap align-items-center justify-content-center mt-5"
+        >
+        
+              {% if post.cllg == 'krct'%}
+              <div class="container-fluid d-flex border border-secondary rounded-5 p-3 justify-content-center">
+            <img src="{% static 'assets/images/ct.png' %}"
+                class="" alt="" style="height: 50px;width: 50px;">&nbsp;&nbsp;&nbsp;
+
+            <h4>
+                K Ramakrishnan College of Technology
+                
+                
+            </h4>
+        
+              {% else %}
+                {% if post.cllg == 'krce'%}
+                <div class="container-fluid d-flex p-3 rounded-5 border border-secondary justify-content-center">
+                <img src="{% static 'assets/images/krce.png' %}"
+                    class="" alt="" style="height: 50px;width: 50px;">&nbsp;&nbsp;&nbsp;
+
+                <h4>
+                    K Ramakrishnan College of Engineering
+                    
+                    
+                </h4>
+                </div>
+                {% else %}
+                <div class="container-fluid d-flex p-3 rounded-5 justify-content-center border border-secondary">
+                <img src="{% static 'assets/images/mkce.png' %}"
+                    class="" alt="" style="height: 50px;width: 50px;">&nbsp;&nbsp;&nbsp;
+
+                <h4>
+                    M Kumarasamy College of Engineering
+                    
+                    
+                </h4>
+                </div>
+                {% endif %}
+              {% endif %}
+        
+    </div></div><br><br>
+    <div>
+        <h3 class="fw-bold mx-3">Related Fests</h3>
+        <hr>
+    </div>
+      <div class="album py-5">
+    <div class="container-fluid">
+
+      <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 g-3 row-gap-3">
+        
+          {% for i in poster %}
+          {% if i.id == post.id %}
+          {% else %}
+          <div class="col">
+          <div class="card shadow-sm col" data-category="{{i.etype}} {{i.cllg}} {{i.dept}}">
+            {% if i.img %}
+            <img src="{{i.img.url|default_if_none:'#'}} " alt="No image" height="300px" class="rounded-5">
+            {% else %}
+            <img src="" alt="No image">
+            {% endif %}
+            <div class="card-body">
+              <h6 class="card-title">{{i.title}}</h6>
+                        <hr>
+                        <h6 class="card-title">{{i.etype}}<span style="opacity: 0">{{i.cllg}}</span></h6>
+                        <hr>
+                        {% if i.cllg == 'krct'%}
+                        <h6>KRCT</h6>
+                        {% else %}
+                            {% if i.cllg == 'krce'%}
+                            <h6>KRCE</h6>
+                            {% else %}
+                            <h6>MKCE</h6>
+                            {% endif %}
+                        {% endif %}
+                        <hr>
+                        <a href="{% url 'detail' i.id %}" class="btn btn-outline-primary btn-sm shadow rounded-3">View Details</a>
+                      {% if i.pay == 0 %}
+                      <span class="text-end"><h6 class="text-end">Free</h6></span>
+                      {% else %}
+                      <span class="text-end"><h6 class="text-end">Rs.{{i.pay}}</h6></span>
+                      {% endif %}
+            </div>
+          </div>
+          </div>
+          {% endif %}
+          {% endfor %}
+        
+        
+      </div>
+    </div>
+  </div>
+</main>
+
+    <div>
+        <h3 class="fw-bold mx-3">How to Reach {{post.cllg}}</h3>
+        <hr>
+    </div>
+    
+<div class="container justify-content-center google-maps">
+            
+            {% if clg == 'krct' %}
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7834.758762557162!2d78.73175307431906!3d10.934687968856935!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baaf79e2e1239bf%3A0x17aa15a4930f40e2!2sK%20RAMAKRISHNAN%20COLLEGE%20OF%20TECHNOLOGY%20(KRCT)!5e0!3m2!1sen!2sin!4v1683697534313!5m2!1sen!2sin"
+                    width="800" height="500" style="border:0;"
+                    allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade" >
+
+            </iframe>
+            {% else%}
+                {% if clg == 'krce' %}
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d659.6375486142163!2d78.73815721176764!3d10.928595379145717!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baaf7316aaaaaab%3A0xb794422e551a89ad!2sK%20Ramakrishnan%20College%20of%20Engineering%20(KRCE)!5e0!3m2!1sen!2sin!4v1683699559105!5m2!1sen!2sin"
+                            width="600" height="450" style="border:0;" allowfullscreen=""
+                            loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+
+                    </iframe>
+                {% else %}
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3915.791826884284!2d78.04626361480318!3d11.05422859213339!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baa2c5940c36779%3A0x638aea1962e8ae96!2sM.Kumarasamy%20College%20of%20Engineering%2C%20Autonomous%20(Accredited%20with%20A%20grade%20by%20NAAC)!5e0!3m2!1sen!2sin!4v1683699918914!5m2!1sen!2sin" width="600" height="450" style="border:0;"
+                            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+
+                    </iframe>
+                {% endif %}
+            {% endif %}
+        </div>
+
+    
+
+
+    <div class="container-fluid">
+  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <p class="col-md-4 mb-0">&copy; {% now "Y" %} KRGI</p>
+
+    <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+      <img src="{% static 'assets/images/kr.png' %}" class="logo-image img-fluid "  style="height: 40px;width: 40px;">
+    </a>
+
+    <ul class="nav col-md-4 justify-content-end">
+      <li class="nav-item"><a href="{% url 'home' %}" class="nav-link px-2 ">Home</a></li>
+      <li class="nav-item"><a href="{% url 'login' %}" class="nav-link px-2 ">Login</a></li>
+      
+    </ul>
+  </footer>
+</div>
+
+
+    <!-- JAVASCRIPT FILES -->
+    
+ <script>
+    const toggleBtn = document.getElementById('toggleBtn');
+const image = document.getElementById('pic');
+let cards = document.querySelectorAll('.card-body');
+let modal = document.querySelector('modal-content');
+let table = document.querySelector('.tab')
+
+let currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+function applyTheme(theme) {
+  const isDarkMode = theme === 'dark';
+  document.documentElement.style.setProperty('--bg-color', isDarkMode ? '#333' : '#fff');
+  document.documentElement.style.setProperty('--text-color', isDarkMode ? '#fff' : '#333');
+  image.style.backgroundImage = isDarkMode ? "url('{% static 'assets/images/dark.jpg' %}')" : "url('{% static 'assets/images/bb.jpg' %}')";
+  if(isDarkMode){
+    table.classList.add("darker");
+  }else{
+    table.classList.remove("darker");
+  }
+  
+  for (var i = 0; i < cards.length; i++) {
+        if(isDarkMode) {
+            cards[i].classList.add("darker");
+        } else {
+            cards[i].classList.remove("darker");
+        }
+    }
+
+  toggleBtn.textContent = isDarkMode ? 'Light Mode' : 'Dark Mode';
+  
+  localStorage.setItem('theme', theme);
+
+}
+
+toggleBtn.addEventListener('click', () => {
+  currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  applyTheme(currentTheme);
+  toggleBtn.textContent = currentTheme === 'dark' ? 'Light Mode' : 'Dark Mode';
+});
+
+applyTheme(currentTheme);
+
+
+    </script>
+    <script>
+ var $filterCheckboxes = $('#exampleModal input[type="checkbox"]');
+var $cards = $('.card');
+
+// Function to apply filters and show/hide cards
+var filterCards = function() {
+  var selectedFilters = [];
+
+  $filterCheckboxes.filter(':checked').each(function() {
+    selectedFilters.push(this.value);
+  });
+
+  // Save selectedFilters array to local storage
+  localStorage.setItem('selectedFilters', JSON.stringify(selectedFilters));
+
+  // Filter cards based on selected filters
+  $cards.hide();
+
+  if (selectedFilters.length === 0) {
+    // No filters selected, show all cards
+    $cards.show();
+  } else {
+    // Loop through each card and check if it matches the selected filters
+    $cards.each(function() {
+      var card = $(this);
+      var filterGroup = card.data('category');
+      var matched = true;
+
+      selectedFilters.forEach(function(filterValue) {
+        if (!filterGroup.includes(filterValue)) {
+          matched = false;
+          return false; // Break the loop if not matched
+        }
+      });
+
+      if (matched) {
+        card.show();
+      }
+    });
+  }
+};
+
+// Event handler for checkbox changes
+$filterCheckboxes.on('change', filterCards);
+
+// Load saved filters from local storage and apply them
+var savedFilters = localStorage.getItem('selectedFilters');
+if (savedFilters) {
+  selectedFilters = JSON.parse(savedFilters);
+  // Check the corresponding checkboxes based on saved filters
+  $filterCheckboxes.each(function() {
+    if (selectedFilters.includes(this.value)) {
+      $(this).prop('checked', true);
+    }
+  });
+
+  // Trigger the filter function to apply saved filters
+  filterCards();
+}
+
+function submitForm(event){
+
+   //Preventing page refresh
+   event.preventDefault();
+} 
+
+var TxtType = function(el, toRotate, period) {
+        this.toRotate = toRotate;
+        this.el = el;
+        this.loopNum = 0;
+        this.period = parseInt(period, 10) || 2000;
+        this.txt = '';
+        this.tick();
+        this.isDeleting = false;
+    };
+
+    TxtType.prototype.tick = function() {
+        var i = this.loopNum % this.toRotate.length;
+        var fullTxt = this.toRotate[i];
+
+        if (this.isDeleting) {
+        this.txt = fullTxt.substring(0, this.txt.length - 1);
+        } else {
+        this.txt = fullTxt.substring(0, this.txt.length + 1);
+        }
+
+        this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
+
+        var that = this;
+        var delta = 200 - Math.random() * 100;
+
+        if (this.isDeleting) { delta /= 2; }
+
+        if (!this.isDeleting && this.txt === fullTxt) {
+        delta = this.period;
+        this.isDeleting = true;
+        } else if (this.isDeleting && this.txt === '') {
+        this.isDeleting = false;
+        this.loopNum++;
+        delta = 500;
+        }
+
+        setTimeout(function() {
+        that.tick();
+        }, delta);
+    };
+
+    window.onload = function() {
+        var elements = document.getElementsByClassName('typewrite');
+        for (var i=0; i<elements.length; i++) {
+            var toRotate = elements[i].getAttribute('data-type');
+            var period = elements[i].getAttribute('data-period');
+            if (toRotate) {
+              new TxtType(elements[i], JSON.parse(toRotate), period);
+            }
+        }
+        // INJECT CSS
+        var css = document.createElement("style");
+        css.type = "text/css";
+        css.innerHTML = ".typewrite";
+        document.body.appendChild(css);
+    };
+
+   
+
+    </script>
+    <script>
+         let cards = document.querySelectorAll('.box')
+    
+function liveSearch() {
+    let search_query = document.getElementById("searchbox").value;
+    
+    //Use innerText if all contents are visible
+    //Use textContent for including hidden elements
+    for (var i = 0; i < cards.length; i++) {
+        if(cards[i].textContent.toLowerCase()
+                .includes(search_query.toLowerCase())) {
+            cards[i].classList.remove("is-hidden");
+        } else {
+            cards[i].classList.add("is-hidden");
+        }
+    }
+}
+
+//A little delay
+let typingTimer;               
+let typeInterval = 500;  
+let searchInput = document.getElementById('searchbox');
+
+searchInput.addEventListener('keyup', () => {
+    clearTimeout(typingTimer);
+    typingTimer = setTimeout(liveSearch, typeInterval);
+});
+    </script>
+
+
+
+  <script src="{% static 'assets/dist/js/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/dist/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/dist/js/owl.carousel.min.js' %}"></script>
+   
+</body>
+
+</html>

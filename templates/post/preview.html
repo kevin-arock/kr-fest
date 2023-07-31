@@ -1,0 +1,245 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+   
+    <meta name="generator" content="Hugo 0.108.0">
+    <title>Event Details</title>
+
+    
+
+    
+
+    
+
+<link href="{% static 'assets/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .b-example-divider {
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+    </style>
+
+    
+    <!-- Custom styles for this template -->
+    <link href="{% static 'assets/dist/css/heroes.css' %}" rel="stylesheet">
+  </head>
+  <body>
+    
+<main>
+  <header>
+  
+      <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light shadow">
+        <div class="container-fluid">
+          <a class="navbar-brand text-primary" href="#"><h1>KRGI</h1></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+              </li>
+              
+            </ul>
+           
+            
+        </div>
+      </nav>
+    </header>
+  <div class="container py-2" style="margin-top: 150px;">
+  <h1 class="pb-2 border-bottom text-center">Preview</h1>
+</div>
+<div class="container col-xxl-8 px-4 py-5">
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+      <div class="col-10 col-sm-8 col-lg-6">
+        {% if post.img %}
+        <img src="{{img}}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" style="width: 500px;height: 500px;" loading="lazy">
+        {% else %}
+        <h1>{{title}}</h1>
+        {% endif %}
+      </div>
+      <div class="col-lg-6   p-5 rounded" style="word-wrap: break-word;">
+        <h1 class="display-5 fw-bold lh-1 mb-3">{{title}}</h1>
+        <h5>{{etype}}</h5>
+        <p><bold>Date : {{date}}</p>
+        <p>Time : {{time}}</p>
+        
+        {% if cllg == 'krct' %}
+        <p>College : K.Ramakrishnan College Of Technology</p>
+        {% else %}
+            {% if cllg == 'krce' %}
+            <p>College : K.Ramakrishnan College Of Engineering</p>
+            {% else %}
+            <p>College : M.Kumarasamy College Of Engineering</p>
+            {% endif %}
+        {% endif %}
+        <p>Venue :{{venue}}</p>
+        {% if pay == 0 %}
+        <p>Payment : Free</p>
+        {% else %}
+        <p>Payment : {{pay}}</p>
+        
+        {% endif %}
+        
+        <p style="">Description : {{description}}</p>
+        <a href="{{reglink}}" class="btn btn-primary">Registration Link</a><br><br><br><br>
+        <form action="{% url 'create' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="submit" value="Add" class="btn btn-primary w-25 text-center" name="submit">
+      </form>
+<!--
+<form action="{% url 'create' %}" method="post" enctype="multipart/form-data">
+{% csrf_token %}
+<div class="row g-3">
+  <div class="col">
+    <label for="">Title</label>
+    <input type="text" class="form-control" placeholder="" aria-label="" name="title" value="{{title}}">
+  </div>
+  <div class="col">
+    <label for="">date</label>
+    <input type="date" class="form-control" placeholder="" aria-label="" name="date" value="{{date}}">
+  </div>
+  <div class="col">
+    <label for="">Time</label>
+    <input type="time" class="form-control" placeholder="" aria-label="" name="time" value="{{time}}">
+  </div>
+  </div><br>
+  <div class="row g-3">
+  <div class="col">
+    <label for="exampleSelect" class="form-label">College</label>
+        <select class="form-select" id="" name="cllg" value="{{cllg}}">
+          {% if user == 'krct@post'%}
+          <option value="krct">KRCT</option>
+          {% else %}
+            {% if user == 'krce@post'%}
+            <option value="krce">KRCE</option>
+            {% else %}
+            <option value="mkce">MKCE</option>
+            {% endif %}
+          {% endif %}
+
+        </select>
+  </div>
+  <div class="col">
+    <label for="exampleSelect" class="form-label">Select Department</label>
+        <select class="form-select" id="" name="dept" value="{{dept}}">
+          <option value="{{dept}}">{{dept}}</option>
+          
+        </select>
+  </div>
+  <div class="col">
+    <label for="">Type of Event</label>
+    <select class="form-select" id="" name="etype" value="{{etype}}">
+          <option value="{{etype}}">{{etype}}</option>
+          
+          
+        </select>
+  </div>
+  </div><br>
+  <div class="row g-3">
+    <div class="col">
+      <label for="">Payment (Enter 0 for free)</label>
+      <input type="number" class="form-control" placeholder="" aria-label="" min="0" name="pay" value="{{pay}}">
+    </div>
+    <div class="col">
+      <label for="">venue</label>
+      <input type="text" class="form-control" placeholder="" aria-label="" name="ven" value="{{ven}}">
+    </div>
+    <div class="col">
+      <label for="">Image</label>
+      <input type="file" class="form-control" placeholder="" aria-label="" name="img" value="{{img}}">
+    </div>
+    </div><br>
+    <div class="row g-3">
+      <textarea name="description" id="" cols="3" rows="3" class="form-control" value="{{description}}">description</textarea>
+      
+    </div><br>
+    <div class="row">
+      <label for="">Registeration Link</label>
+      <input type="text" class="form-control" placeholder="" aria-label="" name="reglink" value="{{reglink}}">
+    </div><br>
+    <div class="row g-3 justify-content-center">
+      <input type="submit" value="Add" class="btn btn-primary w-25 text-center" name="submit">
+    </div>
+    </form>
+-->
+        
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <p class="col-md-4 mb-0 text-muted">&copy; 2023 KRGI</p>
+
+    <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+      <img src="{% static 'assets/images/kr.png' %}" class="logo-image img-fluid " alt="templatemo pod talk" style="height: 40px;width: 40px;">
+    </a>
+
+    <ul class="nav col-md-4 justify-content-end">
+      <li class="nav-item"><a href="{% url 'home' %}" class="nav-link px-2 text-muted">Home</a></li>
+      <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link px-2 text-muted">Logout</a></li>
+      
+    </ul>
+  </footer>
+
+<script src="{% static 'assets/dist/js/bootstrap.bundle.min.js' %}"></script>
+
+  
+</body>
+</html>

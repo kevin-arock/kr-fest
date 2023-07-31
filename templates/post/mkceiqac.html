@@ -1,0 +1,460 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    
+    <meta name="generator" content="Hugo 0.108.0">
+    <title>KRGI</title>
+
+    
+
+    
+
+    
+
+<link href="{% static 'assets/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <style>
+      tbody tr:hover {
+        background-color: #f5f5f5;
+        cursor: pointer;
+      }
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .b-example-divider {
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+      .is-hidden{
+        display: none;
+      }
+      .bg-purple {
+  background-color:#001369;
+}
+
+    </style>
+
+    
+    <!-- Custom styles for this template -->
+    <link href="{% static 'assets/dist/css/dashboard.css' %}" rel="stylesheet">
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+  </head>
+  <body>
+    <header>
+  
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-purple shadow">
+        <div class="container-fluid">
+          <a class="text-light fw-bold text-decoration-none" href="#"><h4>KRGI</h4></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'krceiqac' %}">dashboard</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="{% url 'mkceiqac_archive' %}">Archives</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+              </li>
+              
+            </ul>
+            <form class="d-flex" action="{% url 'mkceiqac' %}" role="search" method="post">
+              {% csrf_token %}
+              <input class="form-control me-2" type="text" id="searchbox" placeholder="Search Event" aria-label="Search" name="search">
+             
+            </form>
+            
+        </div>
+      </nav>
+    </header>   
+    <main class="p-5 mt-5">
+      {% for m in messages %}
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <img src="{% static 'assets/images/kr1.jpg' %}" class="logo-image img-fluid  shadow" alt="" style="height: 25px;width: 25px; border-radius: 50%;">
+        <h1 class="modal-title fs-5 mx-3" id="exampleModalLabel">KR FEST</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="justify-content-center d-flex">
+        <img src="{% static 'assets/images/checked.png' %}" class="logo-image img-fluid shadow" alt="" style="height: 50px;width: 50px; border-radius: 50%;">
+        </div><br>
+        <div class="d-flex justify-content-center text-center">
+        <h5>{{m}}</h5>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal">OK</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">MKCE Posts</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <button id="generateExcelButton" class="btn btn-primary btn-sm me-2">Generate Excel</button>
+          <select id="departmentFilter">
+  <option value="">All Departments</option>
+  <option value="cse">CSE</option>
+  <option value="aids">AIDS</option>
+  <option value="aiml">AIML</option>
+  <option value="ece">ECE</option>
+  <option value="eee">EEE</option>
+  <option value="mech">Mechanical</option>
+  <option value="civil">Civil</option>
+</select>
+
+        </div>
+      </div>
+      <div class="table-responsive rounded-3 shadow">
+      <table class="table text-center" id="data-table">
+        <thead class="bg-purple text-light">
+          <th>Event Name</th>
+            <th>Date Of Event</th>
+            <th>Department</th>
+            <th>Post Status</th>
+            
+            
+            <th>View Post</th>
+            <th>Approve</th>
+            <th>Reject</th>
+            
+            <th>Closed Registration</th>
+            <th>Add to Archive</th>
+        </thead>
+        <tbody>
+        
+          {% for i in posts%}
+          {% if i.is_archive %}
+          {% else %}
+            <tr class="box">
+            <td class="fw-bold">{{i.title}}</td>
+            <td class="fw-bold">{{i.date}}</td>
+            <td class="fw-bold department">{{i.dept}}</td>
+            {% if i.approved %}
+            <td class="text-success fw-bold"><b>Approved</b></td>
+                
+            <td><a href="{% url 'admindetail' i.id %}"><button class="btn btn-outline-primary btn-sm">view</button></a></td>
+                {% if i.is_archive %}
+                <td><a href="{% url 'undo' i.id %}" class="btn btn-outline-secondary btn-sm disabled">Undo</a></td>
+                <td><a href="{% url 'undo' i.id %}" class="btn btn-outline-secondary btn-sm disabled">Reject</a></td>
+                <td class="text-secondary fw-bold">Closed</td>
+                <td class="text-success fw-bold"><b>Added</b></td>
+                {% else %}
+                <td><a href="{% url 'undo' i.id %}" class="btn btn-outline-success btn-sm">Undo</a></td>
+                <td><a href="{% url 'undo' i.id %}" class="btn btn-outline-secondary btn-sm disabled">Reject</a></td>
+                      {% if i.closed %}
+                      <td><a href="{% url 'open' i.id %}" class="btn btn-outline-success btn-sm">open</a></td>
+                      {% else %}
+                      <td><a href="{% url 'close' i.id %}" class="btn btn-outline-success btn-sm">close</a></td>
+                      {% endif %}
+                <td><a href="{% url 'archive' i.id %}" class="btn btn-outline-danger btn-sm">Add to Archive</a></td>
+                {% endif %}
+            </tr>
+            {% else %}
+            <td class="text-danger"><b>Not Approved</b></td>
+                
+            <td><a href="{% url 'admindetail' i.id %}"><button class="btn btn-outline-primary btn-sm">view</button></a></td>
+            <td><a href="{% url 'approve' i.id %}"><button class="btn btn-outline-success btn-sm">Approve</button></a></td>
+            <td><a href="{% url 'delete' i.id %}" class="btn btn-outline-danger btn-sm">Reject</a></td>
+                      {% if i.closed %}
+                      <td><a href="{% url 'open' i.id %}" class="btn btn-outline-success btn-sm">open</a></td>
+                      {% else %}
+                      <td><a href="{% url 'close' i.id %}" class="btn btn-outline-secondary btn-sm disabled">close</a></td>
+                      {% endif %}
+            <td><a href="{% url 'archive' i.id %}" class="btn btn-outline-secondary btn-sm disabled">Add to Archive</a></td>
+            </tr>
+            {% endif %}
+           {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <!--
+    <nav aria-label="Page navigation example" class="mt-5">
+        <ul class="pagination justify-content-center">
+          
+       
+      
+      {% if post.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page=1">&laquo First</a></li>
+      
+        <li class="page-item"><a class="page-link" href="?page={{ post.previous_page_number }}">Previous</a></li>
+        
+      {% endif %}
+      
+      
+      <li class="page-item disabled"><a href="#" class="page-link">Page {{ venues.number }} of {{ venues.paginator.num_pages }}</a></li>
+      
+      
+      {% for i in nums %}
+        <li class="page-item"><a class="page-link" href="?page={{ forloop.counter }}">{{ forloop.counter }}</a></li>
+      
+      {% endfor %}
+      
+      
+      {% if post.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{ post.next_page_number }}">Next</a></li>
+      
+        <li class="page-item"><a class="page-link" href="?page={{ post.paginator.num_pages }}">Last &raquo</a></li>
+      
+      {% endif %}
+      
+       </ul>
+      </nav>
+      -->
+    </main>
+  </div>
+</div>
+<div class="container-fluid">
+  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <p class="col-md-4 mb-0 text-muted">&copy; {% now "Y" %} KRGI</p>
+
+    <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+      <img src="{% static 'assets/images/kr.png' %}" class="logo-image img-fluid " alt="templatemo pod talk" style="height: 40px;width: 40px;">
+    </a>
+
+    <ul class="nav col-md-4 justify-content-end">
+      <li class="nav-item"><a href="{% url 'home' %}" class="nav-link px-2 text-muted">Home</a></li>
+      <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link px-2 text-muted">Logout</a></li>
+      
+    </ul>
+  </footer>
+</div>
+
+    <script src="{% static 'assets/dist/js/bootstrap.bundle.min.js' %}"></script>
+
+      <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous">
+
+      </script>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
+      <script src="{% static 'assets/dist/js/dashboard.js' %}"></script>
+      <script type="text/javascript">
+        setTimeout(() => {
+        let get = document.getElementById('element');
+        get.remove();
+        }, 2000);
+        </script>
+        <script type="text/javascript">
+         let cards = document.querySelectorAll('.box')
+    
+function liveSearch() {
+    let search_query = document.getElementById("searchbox").value;
+    
+    //Use innerText if all contents are visible
+    //Use textContent for including hidden elements
+    for (var i = 0; i < cards.length; i++) {
+        if(cards[i].textContent.toLowerCase()
+                .includes(search_query.toLowerCase())) {
+            cards[i].classList.remove("is-hidden");
+        } else {
+            cards[i].classList.add("is-hidden");
+        }
+    }
+}
+
+//A little delay
+let typingTimer;               
+let typeInterval = 500;  
+let searchInput = document.getElementById('searchbox');
+
+searchInput.addEventListener('keyup', () => {
+    clearTimeout(typingTimer);
+    typingTimer = setTimeout(liveSearch, typeInterval);
+});
+    </script>
+<script>
+  /* globals Chart:false, feather:false */
+
+(() => {
+  'use strict'
+
+  feather.replace({ 'aria-hidden': 'true' })
+
+  // Graphs
+  const ctx = document.getElementById('myChart')
+  // eslint-disable-next-line no-unused-vars
+  const myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: [
+        'Total Events',
+        'Approved Events',
+        'Pending Events',
+        
+      ],
+      datasets: [{
+        data: [
+          15339,
+          21345,
+          18483,
+          24003,
+          23489,
+          24092,
+          12034
+        ],
+        lineTension: 0,
+        backgroundColor: 'transparent',
+        borderColor: '#007bff',
+        borderWidth: 4,
+        pointBackgroundColor: '#007bff'
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: false
+          }
+        }]
+      },
+      legend: {
+        display: false
+      }
+    }
+  })
+})()
+
+</script>
+<script>
+  // Show the success modal when the page loads
+  window.addEventListener('DOMContentLoaded', function() {
+      var successModal = new bootstrap.Modal(document.getElementById('successModal'));
+      successModal.show();
+  });
+</script>
+<script>
+document.getElementById('generateExcelButton').addEventListener('click', function() {
+    // Create a new workbook
+    var workbook = XLSX.utils.book_new();
+
+    // Get the table element
+    var table = document.getElementById('data-table');
+
+    // Create an empty array to store the table data
+    var tableData = [];
+
+    // Get the table headers
+    var headers = [];
+    var headerRow = table.rows[0];
+    for (var i = 0; i <= 3; i++) {  // Extract headers up to "Report Status" column (4th index)
+        headers.push(headerRow.cells[i].innerText);
+    }
+    tableData.push(headers);
+
+    // Iterate through the table rows and extract data up to "Report Status" column
+    for (var j = 1; j < table.rows.length; j++) {
+        var rowData = [];
+        var row = table.rows[j];
+        for (var k = 0; k <= 3; k++) {  // Extract data up to "Report Status" column (4th index)
+            rowData.push(row.cells[k].innerText);
+        }
+        tableData.push(rowData);
+    }
+
+    // Create a worksheet from the table data
+    var worksheet = XLSX.utils.aoa_to_sheet(tableData);
+
+    // Add the worksheet to the workbook
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+
+    // Save the workbook as an Excel file
+    var excelFileName = "output.xlsx";
+    XLSX.writeFile(workbook, excelFileName);
+});
+
+    </script>
+  <script type="text/javascript">
+   // Get the filter dropdown element
+var filterDropdown = document.getElementById('departmentFilter');
+
+// Load the saved department value from local storage
+var savedDepartment = localStorage.getItem('selectedDepartment');
+if (savedDepartment) {
+  // Set the dropdown value to the saved department value
+  filterDropdown.value = savedDepartment;
+}
+
+// Add event listener to the filter dropdown
+filterDropdown.addEventListener('change', function() {
+  // Get the selected department value
+  var selectedDepartment = this.value.toLowerCase();
+
+  // Save the selected department value to local storage
+  localStorage.setItem('selectedDepartment', selectedDepartment);
+
+  // Get all table rows
+  var tableRows = document.querySelectorAll('#data-table tbody tr');
+
+  // Loop through the rows and hide/show based on the selected department
+  for (var i = 0; i < tableRows.length; i++) {
+    var row = tableRows[i];
+    var department = row.querySelector('.department').textContent.toLowerCase();
+
+    if (selectedDepartment === '' || department === selectedDepartment) {
+      // Show row if the selected department is empty or matches the row's department
+      row.style.display = 'table-row';
+    } else {
+      // Hide row if the selected department doesn't match the row's department
+      row.style.display = 'none';
+    }
+  }
+});
+
+    </script>
+  </body>
+</html>

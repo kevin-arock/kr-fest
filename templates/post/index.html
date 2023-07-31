@@ -1,0 +1,766 @@
+{% load static%}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>KRGI</title>
+
+    <!-- CSS FILES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    
+
+    <link rel="stylesheet" href="{% static 'assets/dist/css/bootstrap.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/dist/css/bootstrap-icons.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/dist/css/owl.carousel.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/dist/css/owl.theme.default.min.css' %}">
+
+    
+    <style>
+      body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  overflow-x: hidden;
+}
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .b-example-divider {
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+
+#pic{
+    background-image: url("{% static 'assets/images/dark.jpg' %}");
+
+  /* Full height */
+  height: 100%;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-backdrop-filter: blur(50px);
+  backdrop-filter: blur(10px);
+}
+.ss{
+  background-image: url("{% static 'assets/images/sl.jpg' %}");
+
+/* Full height */
+height: 100%;
+/* Center and scale the image nicely */
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+-webkit-backdrop-filter: blur(50px);
+backdrop-filter: blur(10px);
+}
+
+#h{
+    background-image: url("neb.jpg");
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-backdrop-filter: blur(50px);
+  backdrop-filter: blur(50px);
+}
+
+
+.bg-purple {
+  background-color:#001369;
+}
+.text-purple {
+  color:#001369;
+}
+ .owl-carousel .owl-item.active.center {
+      
+      filter: none;
+      z-index: 2;
+      border-radius: 100%;
+    }
+
+    .owl-carousel .owl-item:not(.active) {
+      filter: blur(2px);
+      transform: scale(0.8);
+      z-index: 1;
+    }
+
+    .owl-carousel .owl-item {
+      transition: all 0.4s ease-in-out;
+    }
+        .owl-carousel .owl-dot span {
+      width: 12px;
+      height: 12px;
+      margin: 0 5px;
+      border-radius: 50%;
+      background: #555;
+      display: flex;
+      transition: all 0.3s ease;
+      justify-content: center;
+      align-items: center;
+      align-self: center;
+      position: relative;
+    }
+
+    .owl-carousel .owl-dot.active span {
+      background: #ddd;
+    }
+.rocket {
+  position: relative;
+  top: 50%;
+  left: 0;
+  width: 50px;
+  height: 50px;
+  background-image: url("{% static 'assets/images/shuttle.png' %}"); /* Replace with your rocket image */
+  background-size: cover;
+ animation: zigzag 4s linear infinite;
+}
+
+@keyframes zigzag {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+  25% {
+    transform: translateX(25vw) translateY(-25px) rotate(45deg);
+  }
+  50% {
+
+    transform: translateX(50vw) translateY(0px) rotate(60deg);
+  }
+  75% {
+    transform: translateX(75vw) translateY(25px) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100vw) translateY(0px);
+  }
+}
+.sec1 {
+  background-color: #f6fafd;
+  background-image: linear-gradient(to bottom, #c2e9fb 0%, #a5d8f7 50%, #84c3f3 100%);
+}
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+
+.toggle-button {
+  padding: 8px 16px;
+  background-color: darkblue;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+
+  transition: background-color 0.3s;
+}
+    </style>
+    
+
+
+</head>
+
+<body>
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-purple fixed-top" aria-label="Offcanvas navbar large">
+    <div class="container-fluid d-flex">
+        <a class="navbar-brand me-lg-5 me-0" href="{% url 'home' %}">
+        <img src="{% static 'assets/images/kr1.jpg' %}" class="logo-image img-fluid shadow" alt="" style="height: 30px;width: 30px; border-radius: 50%;">
+        </a>
+      <a class="navbar-brand fw-bold" href="{% url 'home' %}">KR FEST</a>
+      <button id="toggleBtn" class="toggle-button justify-content-center mx-5"></button>
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasNavbar2Label">KR FEST</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'fest' %}">Fests</a>
+            </li>
+            
+          </ul>
+          
+        </div>
+      </div>
+    </div>
+  </nav>
+
+</header>
+    <main>
+
+        <div class="container-fluid  py-5" id="pic">
+    <div class="row flex-lg-row-reverse align-items-center py-5">
+      <div class="col-12 col-sm-10 col-lg-6 rounded-5">
+        {% if poster == True %}
+        
+        {% else %}
+          <div id="carousel" class="owl-carousel rounded-5">
+            {% for f in poster %}
+            {% if f.img %}
+            <img src="{{f.img.url|default_if_none:'#'}}" alt="No image" loading="lazy" class="d-block mx-lg-auto img-fluid rounded-5 shadow " style="height:450px;">
+            {% else %}
+            <img src="" alt="" width="700" height="900" loading="lazy" class="d-block mx-lg-auto img-fluid rounded-5 shadow">
+            {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+      <div class="col-lg-6 py-5">
+        <h1 class="display-3 fw-bold lh-1 mb-3 text-purple">KR GROUPS</h1>
+        
+        <p class="lead text-purple fw-bold">Welcome to our vibrant Institution, where a myriad of captivating festivities await your exploration.</p>
+      </div>
+    </div>
+  </div><br><br>
+    
+    <section class="py-5 mt-5 container-fluid">
+    
+    <div class="justify-content-between d-flex container-fluid text-center bg-purple rounded-5 p-3 ss ele" id="one">
+      
+        <img src="{% static 'assets/images/tent.png' %}" class="logo-image img-fluid" alt="" style="height: 70px;width: 70px;">
+        
+      <h1 class="display-5 fw-bold text-light">Our Recent Fests</h1>
+      <img src="{% static 'assets/images/firework.png' %}" class="logo-image img-fluid " alt="" style="height: 70px;width: 70px;">
+</div>
+<!-- Button trigger modal -->
+
+ 
+<!-- Modal -->
+{% for m in messages %}
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <img src="{% static 'assets/images/kr1.jpg' %}" class="logo-image img-fluid  shadow" alt="" style="height: 25px;width: 25px; border-radius: 50%;">
+        <h1 class="modal-title fs-5 mx-3 text-dark" id="exampleModalLabel">KR FEST</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="rel()"></button>
+      </div>
+      <div class="modal-body">
+        <div class="justify-content-center d-flex">
+        <img src="{% static 'assets/images/checked.png' %}" class="logo-image img-fluid shadow" alt="" style="height: 50px;width: 50px; border-radius: 50%;">
+        </div><br>
+        <div class="d-flex justify-content-center text-center">
+        <h5 class="text-dark">{{m}}</h5>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" onclick="rel()" class="btn btn-success" data-bs-dismiss="modal">OK</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+    <div class="album mt-5 py-5">
+    <div class="container-fluid">
+
+      <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-gap-3 col-gap-3 g-3">
+        {% if poster == True %}
+        <div class="justify-content-center text-center container-fluid">
+          <h3 class="text-center">There are no fests available right now</h3>
+        </div>
+        {% else %}        
+          {% for i in post %}
+          {% if i.approved %}
+          <div class="col">
+          <div class="card shadow-sm    rounded-5" data-category="{{i.etype}} {{i.cllg}} {{i.dept}}">
+            {% if i.img %}
+            <img src="{{i.img.url|default_if_none:'#'}}" alt="No image" height="300px"  class="rounded-5">
+            {% else %}
+            <img src="" alt="No image">
+            {% endif %}
+            
+          </div>
+         </div>
+          {% endif %}
+          {% endfor %}
+        {% endif %}
+        
+        
+      </div>
+    </div>
+  </div>
+        </div>
+        <div class="justify-content-center d-flex">
+
+          <a href="{% url 'fest' %}" class="btn btn-outline-primary">Explore More</a>
+        </div>
+     </section><br><div class="rocket"></div><br>
+    <section class="py-5 mt-5 container-fluid">
+      
+      <div class="justify-content-between bg-purple p-3 rounded-5 d-flex container-fluid text-center ss" id="two">
+        <img src="{% static 'assets/images/monitoring.png' %}" class="logo-image img-fluid" alt="" style="height: 70px;width: 70px;">
+        <h1 class="display-5 fw-bold text-light">Our Fest Statistics</h1>
+        <img src="{% static 'assets/images/stat.png' %}" class="logo-image img-fluid" alt="" style="height: 70px;width: 70px;">
+      </div>
+      
+        {% if poster == True %}
+        <div class="justify-content-center text-center py-5">
+          <h3>There are no fests available right now</h3>
+        </div>
+        {% else %}
+              <div class="col-md-8 mx-5 py-5 mt-5 justify-content-center">
+                
+                <h2 class="fw-bold purple">KRGI</h2>
+               
+                <canvas id="gi"></canvas>
+                
+              </div>
+                <div class="container-fluid px-5 pb-5 py-5">
+                  
+            <div class="row">
+              
+              <div class="col-md-4">
+                <h2 class="fw-bold">KRCE</h2>
+                <canvas id="pie"></canvas>
+              </div>
+              <div class="col-md-4">
+                <h2 class="fw-bold">KRCT</h2>
+                <canvas id="pie2"></canvas>
+              </div>
+              <div class="col-md-4">
+                <h2 class="fw-bold">MKCE</h2>
+                <canvas id="pie3"></canvas>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+    </section>
+        
+    
+    </main>
+    
+
+    <br><br><br><br><br><br><br>
+
+
+    <div class="container-fluid">
+  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <p class="col-md-4 mb-0">&copy; {% now "Y" %} KRGI</p>
+
+    <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+      <img src="{% static 'assets/images/kr.png' %}" class="logo-image img-fluid " alt="templatemo pod talk" style="height: 40px;width: 40px;">
+    </a>
+
+    <ul class="nav col-md-4 justify-content-end">
+      <li class="nav-item"><a href="{% url 'home' %}" class="nav-link px-2">Home</a></li>
+      <li class="nav-item"><a href="{% url 'login' %}" class="nav-link px-2">Login</a></li>
+      
+    </ul>
+  </footer>
+</div>
+<script>
+    const toggleBtn = document.getElementById('toggleBtn');
+const image = document.getElementById('pic');
+const side = document.getElementById('one');
+const two = document.getElementById('two');
+let currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+function applyTheme(theme) {
+  const isDarkMode = theme === 'dark';
+  document.documentElement.style.setProperty('--bg-color', isDarkMode ? '#333' : '#fff');
+  document.documentElement.style.setProperty('--text-color', isDarkMode ? '#fff' : '#333');
+  image.style.backgroundImage = isDarkMode ? "url('{% static 'assets/images/dark.jpg' %}')" : "url('{% static 'assets/images/bbb.jpg' %}')";
+  side.style.backgroundImage = isDarkMode ? "url('{% static 'assets/images/dark.jpg' %}')" : "url('{% static 'assets/images/sl.jpg' %}')";
+  two.style.backgroundImage = isDarkMode ? "url('{% static 'assets/images/dark.jpg' %}')" : "url('{% static 'assets/images/sl.jpg' %}')";
+  toggleBtn.textContent = isDarkMode ? 'Light Mode' : 'Dark Mode';
+  
+  localStorage.setItem('theme', theme);
+
+}
+
+toggleBtn.addEventListener('click', () => {
+  currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  applyTheme(currentTheme);
+  toggleBtn.textContent = currentTheme === 'dark' ? 'Light Mode' : 'Dark Mode';
+});
+
+applyTheme(currentTheme);
+
+
+  </script>
+
+    <!-- JAVASCRIPT FILES -->
+    <script
+src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
+<script>
+
+Chart.defaults.RoundedDoughnut    = Chart.helpers.clone(Chart.defaults.doughnut);
+Chart.controllers.RoundedDoughnut = Chart.controllers.doughnut.extend({
+    draw: function(ease) {
+        var ctx           = this.chart.ctx;
+        var easingDecimal = ease || 1;
+        var arcs          = this.getMeta().data;
+        Chart.helpers.each(arcs, function(arc, i) {
+            arc.transition(easingDecimal).draw();
+
+            var pArc   = arcs[i === 0 ? arcs.length - 1 : i - 1];
+            var pColor = pArc._view.backgroundColor;
+
+            var vm         = arc._view;
+            var radius     = (vm.outerRadius + vm.innerRadius) / 2;
+            var thickness  = (vm.outerRadius - vm.innerRadius) / 2;
+            var startAngle = Math.PI - vm.startAngle - Math.PI / 2;
+            var angle      = Math.PI - vm.endAngle - Math.PI / 2;
+
+            ctx.save();
+            ctx.translate(vm.x, vm.y);
+
+            ctx.fillStyle = i === 0 ? vm.backgroundColor : pColor;
+            ctx.beginPath();
+            ctx.arc(radius * Math.sin(startAngle), radius * Math.cos(startAngle), thickness, 0, 2 * Math.PI);
+            ctx.fill();
+
+            ctx.fillStyle = vm.backgroundColor;
+            ctx.beginPath();
+            ctx.arc(radius * Math.sin(angle), radius * Math.cos(angle), thickness, 0, 2 * Math.PI);
+            ctx.fill();
+
+            ctx.restore();
+        });
+    }
+});
+
+
+// EXAMPLE 1
+var ctx5 = document.getElementById("pie");
+var pieChart5 = new Chart(ctx5, {
+    type: 'pie',
+    options: {
+        cutoutPercentage: 50,
+        legend: {
+            position: 'left',
+            labels: {
+                boxWidth: 15,
+                fontStyle: 'italic',
+                fontColor: '#aaa',
+                usePointStyle: true,
+            }
+        },
+    },
+    data: {
+        labels: [
+            "Symposium",
+            "Workshop",
+            "Webinar",
+            "FDP"
+        ],
+        datasets: [
+            {
+                data: [{{cesym}}, {{cew}},{{ceww}},{{cef}}],
+                borderWidth: 2,
+                borderColor: [
+                    '#46d8d5',
+                    "#f5e132",
+                    '#fa4654',
+                    '#3cb371',
+                ],
+                backgroundColor: [
+                    'rgba(70, 215, 212, 0.22)',
+                    "rgba(245, 225, 50, 0.23)",
+                    "rgb(255, 99, 111,0.22)",
+                    "rgb(0, 255, 115,0.23)",
+                ],
+                hoverBackgroundColor: [
+                    '#46d8d5',
+                    "#f5e132",
+                    '#fa4654',
+                    '#3cb371',
+                ]
+            }]
+        }
+    });
+var ctx5 = document.getElementById("pie2");
+var pieChart5 = new Chart(ctx5, {
+    type: 'pie',
+    options: {
+        cutoutPercentage: 50,
+        legend: {
+            position: 'left',
+            labels: {
+                boxWidth: 10,
+                fontStyle: 'italic',
+                fontColor: '#aaa',
+                usePointStyle: true,
+            }
+        },
+    },
+    data: {
+        labels: [
+            "Symposium",
+            "Workshop",
+            "Webinar",
+            "FDP"
+        ],
+        datasets: [
+            {
+                data: [{{ctsym}}, {{ctw}},{{ctww}},{{ctf}}],
+                borderWidth: 2,
+                borderColor: [
+                    '#46d8d5',
+                    "#f5e132",
+                    '#fa4654',
+                    '#3cb371',
+                ],
+                backgroundColor: [
+                    'rgba(70, 215, 212, 0.22)',
+                    "rgba(245, 225, 50, 0.23)",
+                    "rgb(255, 99, 111,0.22)",
+                    "rgb(0, 255, 115,0.22)",
+                ],
+                hoverBackgroundColor: [
+                    '#46d8d5',
+                    "#f5e132",
+                    '#fa4654',
+                    '#3cb371',
+                ]
+            }]
+        }
+    });
+var ctx5 = document.getElementById("pie3");
+var pieChart5 = new Chart(ctx5, {
+    type: 'pie',
+    options: {
+        cutoutPercentage: 50,
+        legend: {
+            position: 'left',
+            labels: {
+                boxWidth: 10,
+                fontStyle: 'italic',
+                fontColor: '#aaa',
+                usePointStyle: true,
+            }
+        },
+    },
+    data: {
+        labels: [
+            "Symposium",
+            "Workshop",
+            "Webinar",
+            "FDP"
+        ],
+        datasets: [
+            {
+                data: [{{mksym}}, {{mkw}},{{mkww}},{{mkf}}],
+                borderWidth: 2,
+                borderColor: [
+                    '#46d8d5',
+                    "#f5e132",
+                    '#fa4654',
+                    '#3cb371',
+                ],
+                backgroundColor: [
+                    'rgba(70, 215, 212, 0.22)',
+                    "rgba(245, 225, 50, 0.23)",
+                    "rgb(255, 99, 111,0.22)",
+                    "rgb(0, 255, 115,0.22)",
+                ],
+                hoverBackgroundColor: [
+                    '#46d8d5',
+                    "#f5e132",
+                    '#fa4654',
+                    '#3cb371',
+                ]
+            }]
+        }
+    });
+    var ctx5 = document.getElementById("gi");
+var pieChart5 = new Chart(ctx5, {
+    type: 'pie',
+    options: {
+        cutoutPercentage: 50,
+        legend: {
+            position: 'left',
+            labels: {
+                boxWidth: 10,
+                fontStyle: 'italic',
+                fontColor: '#aaa',
+                usePointStyle: true,
+            }
+        },
+    },
+    data: {
+        labels: [
+            "Symposium",
+            "Workshop",
+            "Webinar",
+            "FDP"
+        ],
+        datasets: [
+            {
+                data: [{{gisym}}, {{giw}},{{giww}},{{gif}}],
+                borderWidth: 2,
+                borderColor: [
+                    '#46d8d5',
+                    "#f5e132",
+                    '#fa4654',
+                    '#3cb371',
+                ],
+                backgroundColor: [
+                    'rgba(70, 215, 212, 0.22)',
+                    "rgba(245, 225, 50, 0.23)",
+                    "rgb(255, 99, 111,0.22)",
+                    "rgb(0, 255, 115,0.22)",
+                ],
+                hoverBackgroundColor: [
+                    '#46d8d5',
+                    "#f5e132",
+                    '#fa4654',
+                    '#3cb371',
+                ]
+            }]
+        }
+    });
+
+
+
+
+</script>
+
+<script>
+       $(document).ready(function() {
+      $("#carousel").owlCarousel({
+        items: 1,
+        loop: true,
+        center: true,
+        margin: 10,
+        autoplay: true,
+        autoplayTimeout: 3000,
+        autoplayHoverPause: true,
+        dots: true, // Enable dots pagination
+        dotsEach: true, // Show dots for each item
+        dotClass: 'owl-dot',
+        dotContainerClass: 'owl-dots',
+      });
+    });
+  </script>
+    <script type="text/javascript">
+      (() => {
+  'use strict'
+
+  document.querySelector('#navbarSideCollapse').addEventListener('click', () => {
+    document.querySelector('.offcanvas-collapse').classList.toggle('open')
+  })
+})()
+
+
+
+    </script>
+    <script>
+      const arr = []
+      {% for i in post %}
+        arr.push(new Date("{{ i.date }}"));
+      {% endfor %}
+      let curDate = new Date();
+      const timeLine = [];
+      let date = document.querySelectorAll('.date');
+      function calc(value) {
+        console.log(value);
+        if (value > curDate) timeLine.push("Future");
+        else if (value < curDate) timeLine.push("Past");
+        else timeLine.push("Live");
+      }
+      arr.forEach(calc);
+  
+      date.forEach((value, index) => {
+        value.innerHTML = timeLine[index];
+      })
+    </script>
+    <script>
+ 
+  function rel() {
+    location.reload();
+}
+
+
+   
+
+    </script>
+    
+
+<script>
+    // Show the success modal when the page loads
+    window.addEventListener('DOMContentLoaded', function() {
+        var successModal = new bootstrap.Modal(document.getElementById('successModal'));
+        successModal.show();
+    });
+</script>
+
+
+
+  <script src="{% static 'assets/dist/js/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/dist/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/dist/js/owl.carousel.min.js' %}"></script>
+   
+</body>
+
+</html>

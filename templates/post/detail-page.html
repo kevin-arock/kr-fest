@@ -1,0 +1,362 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>KRGI</title>
+
+    <!-- CSS FILES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+        <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap-icons.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/css/owl.theme.default.min.css' %}">
+
+    <link href="{% static 'assets/dist//css/templatemo-pod-talk.css' %}" rel="stylesheet">
+    <style>
+
+
+.google-maps {
+
+        position: relative;
+
+        padding-bottom: 75%; // This is the aspect ratio
+
+        height: 0;
+
+        overflow: hidden;
+
+    }
+
+.google-maps iframe {
+
+        position: absolute;
+
+
+
+        width: 80% !important;
+
+        height: 80% !important;
+
+    }
+
+    .video-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        row-gap:50px;
+        column-gap:40px;
+  
+        
+        place-items:center;
+        position:cenetr;
+      }
+      
+      @media (max-width: 800px) {
+        .video-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      
+      
+      @media (min-width: 801px) and (max-width: 1399px) {
+        .video-grid {
+          grid-template-columns: 1fr 1fr ;
+        
+        }
+      }
+
+       
+      @media (min-width: 1400px) and (max-width: 1500px) {
+        .video-grid {
+          grid-template-columns: 1fr 1fr 1fr;
+        }
+      }
+      
+      @media (min-width: 2000px) and (max-width: 3000px) {
+        .video-grid {
+          grid-template-columns: 1fr 1fr 1fr 1fr;
+        }
+      }
+
+       
+      @media (min-width: 3001px) {
+        .video-grid {
+          grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        }
+      }
+
+    </style>
+
+
+</head>
+
+<body>
+
+    <main>
+
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand me-lg-5 me-0" href="{% url 'home' %}">
+                    <img src="{% static 'assets/images/kr1.jpg' %}" class="logo-image img-fluid shadow-lg" alt="" style="height: 60px;width: 60px; border-radius: 50%;">
+                </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                <form action="#" method="get" class="custom-form search-form flex-fill me-3" role="search">
+                    <div class="input-group input-group-lg">
+                                            </div>
+                </form>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-lg-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{% url 'home' %}" onMouseOver="this.style.color='lightgreen'" onMouseOut="this.style.color='white'" style="color:white;">Home</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}" onMouseOver="this.style.color='lightgreen'" onMouseOut="this.style.color='white'" >Login</a>
+                        </li>
+
+                        
+                </div>
+            </div>
+        </nav>
+
+
+        <header class="site-header d-flex flex-column justify-content-center align-items-center">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-12 col-12 text-center">
+
+                        <h2 class="mb-0">Event Detail</h2>
+                    </div>
+
+                </div>
+            </div>
+            <ul class="circles">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+            </ul>
+        </header>
+
+
+        <div class="container col-xxl-8 px-4 py-5">
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+      <div class="col-10 col-sm-8 col-lg-6">
+        {% if post.img %}
+        <img src="{{post.img.url}}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" style="width: 500px;height: 500px;" loading="lazy">
+        {% else %}
+        <h1>{{post.title}}</h1>
+        {% endif %}
+      </div>
+      <div class="col-lg-6   p-5 rounded" style="word-wrap: break-word;">
+        <h1 class="display-5 fw-bold lh-1 mb-3">{{post.title}}</h1>
+        <h5>{{post.etype}}</h5><br>
+        <p><bold>Date : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{post.date}}</p>
+        <p>Time : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{post.time}}</p>
+        {% if post.cllg == 'krct' %}
+        <p>College : &nbsp;&nbsp;&nbsp;&nbsp;K.Ramakrishnan College Of Technology</p>
+        {% else %}
+            {% if post.cllg == 'krce' %}
+            <p>College : &nbsp;&nbsp;&nbsp;&nbsp;K.Ramakrishnan College Of Engineering</p>
+            {% else %}
+            <p>College : &nbsp;&nbsp;&nbsp;&nbsp;M.Kumarasamy College Of Engineering</p>
+            {% endif %}
+        {% endif %}
+        <p>Venue :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{post.venue}}</p>
+        {% if post.pay == 0 %}
+        <p>Payment : Free</p>
+        {% else %}
+        <p>Payment : &nbsp;&nbsp;{{post.pay}}</p>
+        
+        {% endif %}
+        <p style="">Description : {{post.description}}</p><br>
+
+
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+            {% if post.reglink == 'nil' %}
+
+            {% else %}
+
+                <a href="{{post.reglink}}" class="btn btn-success shadow">Register</a>
+            {% endif %}
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+                                    <div
+                                        class="profile-block profile-detail-block d-flex flex-wrap align-items-center justify-content-center mt-5"
+                                        >
+                                        
+                                              {% if post.cllg == 'krct'%}
+                                              <div class="d-flex mb-3 mb-lg-0 mb-md-0">
+                                            <img src="{% static 'assets/images/ct.png' %}"
+                                                class="" alt="" style="height: 50px;width: 50px;">&nbsp;&nbsp;&nbsp;
+
+                                            <h4>
+                                                K Ramakrishnan College of Technology
+                                                
+                                                
+                                            </h4>
+                                        </div>
+                                              {% else %}
+                                                {% if post.cllg == 'krce'%}
+                                                <div class="d-flex mb-3 mb-lg-0 mb-md-0">
+                                                <img src="{% static 'assets/images/krce.png' %}"
+                                                    class="" alt="" style="height: 50px;width: 50px;">&nbsp;&nbsp;&nbsp;
+
+                                                <h4>
+                                                    K Ramakrishnan College of Engineering
+                                                    
+                                                    
+                                                </h4>
+                                                </div>
+                                                {% else %}
+                                                <div class="d-flex mb-3 mb-lg-0 mb-md-0">
+                                                <img src="{% static 'assets/images/mkce.png' %}"
+                                                    class="" alt="" style="height: 50px;width: 50px;">&nbsp;&nbsp;&nbsp;
+
+                                                <h4>
+                                                    M Kumarasamy College of Engineering
+                                                    
+                                                    
+                                                </h4>
+                                                </div>
+                                                {% endif %}
+                                              {% endif %}
+                                        
+                                    </div><br><br>
+                                    <div class="container-fluid justify-content-center">
+                                        <div class="col-lg-12 col-12">
+                                                <div class="section-title-wrap mb-5">
+                                                    <h4 class="section-title mx-5">Related Events</h4>
+                                                </div>
+                                            </div>
+                                        <div class=" video-grid p-5 container-fluid">
+                        
+                                            
+                                            {% for i in poster %}
+                                            {% if i.approved %}
+                        
+                                            <div class="card  flower col shadow box justify-content-center p-2" style="width: 100%;height:100%;" data-category="{{i.dept}} {{i.etype}} {{i.cllg}}">
+                                                {% if i.img %}
+                                                <img src="{{i.img.url|default_if_none:'#'}}" alt="No image" height="450px">
+                                                {% else %}
+                                                <img src="" alt="No image">
+                                                {% endif %}
+                                              <div class="card-body">
+                                                <h6 class="card-title">{{i.title}}</h6>
+                                                <hr>
+                                                <h6 class="card-title">{{i.etype}}</h6>
+                                                <hr>
+                                                {% if i.cllg == 'krct'%}
+                                                <h6>KRCT</h6>
+                                                {% else %}
+                                                    {% if i.cllg == 'krce'%}
+                                                    <h6>KRCE</h6>
+                                                    {% else %}
+                                                    <h6>MKCE</h6>
+                                                    {% endif %}
+                                                {% endif %}
+                                                <hr>
+                                                <a href="{% url 'detail' i.id %}" class="btn btn-outline-primary btn-sm shadow">View Details</a>
+                                              </div>
+                                              {% if i.pay == 0 %}
+                                              <p class="text-end"><h6 class="text-end">Free</h6></p>
+                                              {% else %}
+                                              <p class="text-end"><h5 class="text-end">Rs.{{i.pay}}</h5></p>
+                                              {% endif %}
+                                              <span style="opacity: 0">{{i.cllg}}</span>
+                                            </div>
+                                            {% endif %}
+                                            {% endfor %}
+                                    </div>
+                                </div><br><br>
+        <div class="container justify-content-center google-maps">
+            <div class="col-lg-12 col-12">
+                        <div class="section-title-wrap mb-5">
+                            <h4 class="section-title">How to reach {{clg}}</h4>
+                        </div>
+                    </div>
+            {% if clg == 'krct' %}
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7834.758762557162!2d78.73175307431906!3d10.934687968856935!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baaf79e2e1239bf%3A0x17aa15a4930f40e2!2sK%20RAMAKRISHNAN%20COLLEGE%20OF%20TECHNOLOGY%20(KRCT)!5e0!3m2!1sen!2sin!4v1683697534313!5m2!1sen!2sin"
+                    width="800" height="500" style="border:0;"
+                    allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade" >
+
+            </iframe>
+            {% else%}
+                {% if clg == 'krce' %}
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d659.6375486142163!2d78.73815721176764!3d10.928595379145717!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baaf7316aaaaaab%3A0xb794422e551a89ad!2sK%20Ramakrishnan%20College%20of%20Engineering%20(KRCE)!5e0!3m2!1sen!2sin!4v1683699559105!5m2!1sen!2sin"
+                            width="600" height="450" style="border:0;" allowfullscreen=""
+                            loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+
+                    </iframe>
+                {% else %}
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3915.791826884284!2d78.04626361480318!3d11.05422859213339!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baa2c5940c36779%3A0x638aea1962e8ae96!2sM.Kumarasamy%20College%20of%20Engineering%2C%20Autonomous%20(Accredited%20with%20A%20grade%20by%20NAAC)!5e0!3m2!1sen!2sin!4v1683699918914!5m2!1sen!2sin" width="600" height="450" style="border:0;"
+                            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+
+                    </iframe>
+                {% endif %}
+            {% endif %}
+        </div>
+        
+    </main>
+    <br><br><br><br><br><br><br><br><br><br><br>
+
+
+
+
+    <div class="container-fluid">
+  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <p class="col-md-4 mb-0 text-muted">&copy; {% now "Y" %} KRGI</p>
+
+    <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+      <img src="{% static 'assets/images/kr.png' %}" class="logo-image img-fluid " alt="templatemo pod talk" style="height: 40px;width: 40px;">
+    </a>
+
+    <ul class="nav col-md-4 justify-content-end">
+      <li class="nav-item"><a href="{% url 'home' %}" class="nav-link px-2 text-muted">Home</a></li>
+      <li class="nav-item"><a href="{% url 'login' %}" class="nav-link px-2 text-muted">Login</a></li>
+      
+    </ul>
+  </footer>
+</div>
+
+
+    <!-- JAVASCRIPT FILES -->
+    <script src="{% static 'assets/js/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'assets/js/custom.js' %}"></script>
+
+</body>
+
+</html>
